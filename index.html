@@ -53,6 +53,12 @@ color:black;
 text-decoration:none;
 font-weight:bold;
 border-radius:5px;
+transition: 0.3s;
+}
+
+.btn:hover{
+background:#ff9500;
+transform:scale(1.05);
 }
 
 .section{
@@ -79,10 +85,81 @@ margin:15px 0;
 font-size:22px;
 }
 
+/* Clock Styles */
+.clock-section{
+padding:60px 20px;
+background:#111;
+}
+
+.clock-container{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+gap:20px;
+max-width:1200px;
+margin:0 auto;
+}
+
+.clock-card{
+background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
+padding:25px;
+border-radius:15px;
+border:2px solid #ffb300;
+box-shadow:0 0 20px rgba(255, 179, 0, 0.3);
+transition:transform 0.3s;
+}
+
+.clock-card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 30px rgba(255, 179, 0, 0.5);
+}
+
+.timezone-name{
+font-size:18px;
+color:#ffb300;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.digital-clock{
+font-size:48px;
+font-weight:bold;
+color:#00ff00;
+font-family:'Courier New', monospace;
+text-shadow:0 0 10px #00ff00;
+margin:15px 0;
+letter-spacing:2px;
+}
+
+.date-display{
+font-size:14px;
+color:#888;
+margin-top:10px;
+}
+
+.clock-title{
+text-align:center;
+color:#ffb300;
+font-size:28px;
+margin-bottom:40px;
+}
+
 footer{
 background:#111;
 padding:20px;
 text-align:center;
+border-top:2px solid #ffb300;
+}
+
+@media (max-width: 768px){
+.hero-content h1{
+font-size:40px;
+}
+.hero-content h2{
+font-size:24px;
+}
+.digital-clock{
+font-size:36px;
+}
 }
 </style>
 
@@ -115,10 +192,95 @@ Register Now
 </div>
 </section>
 
+<!-- World Clock Section -->
+<section class="clock-section">
+<h2 class="clock-title">⏰ Tournament Time Zone Clock</h2>
+<div class="clock-container">
+<div class="clock-card">
+<div class="timezone-name">🇵🇰 Pakistan (PKT)</div>
+<div class="digital-clock" id="clock-pkt">00:00:00</div>
+<div class="date-display" id="date-pkt"></div>
+</div>
+
+<div class="clock-card">
+<div class="timezone-name">🇸🇦 Saudi Arabia (AST)</div>
+<div class="digital-clock" id="clock-ast">00:00:00</div>
+<div class="date-display" id="date-ast"></div>
+</div>
+
+<div class="clock-card">
+<div class="timezone-name">🇬🇧 London (GMT)</div>
+<div class="digital-clock" id="clock-gmt">00:00:00</div>
+<div class="date-display" id="date-gmt"></div>
+</div>
+
+<div class="clock-card">
+<div class="timezone-name">🇺🇸 USA (EST)</div>
+<div class="digital-clock" id="clock-est">00:00:00</div>
+<div class="date-display" id="date-est"></div>
+</div>
+
+<div class="clock-card">
+<div class="timezone-name">🇮🇳 India (IST)</div>
+<div class="digital-clock" id="clock-ist">00:00:00</div>
+<div class="date-display" id="date-ist"></div>
+</div>
+
+<div class="clock-card">
+<div class="timezone-name">🇦🇺 Australia (AEST)</div>
+<div class="digital-clock" id="clock-aest">00:00:00</div>
+<div class="date-display" id="date-aest"></div>
+</div>
+</div>
+</section>
+
 <footer>
 <h3>Q.R GAMING ZONE</h3>
 <p>Powered by PUBG Esports Tournament</p>
+<p style="margin-top:10px; font-size:12px;">⏰ Live Tournament Countdown Clock</p>
 </footer>
+
+<script>
+function updateClocks(){
+const now = new Date();
+
+const timezones = [
+{ id: 'pkt', name: 'Asia/Karachi', label: 'PKT' },
+{ id: 'ast', name: 'Asia/Riyadh', label: 'AST' },
+{ id: 'gmt', name: 'Europe/London', label: 'GMT' },
+{ id: 'est', name: 'America/New_York', label: 'EST' },
+{ id: 'ist', name: 'Asia/Kolkata', label: 'IST' },
+{ id: 'aest', name: 'Australia/Sydney', label: 'AEST' }
+];
+
+timezones.forEach(tz => {
+const formatter = new Intl.DateTimeFormat('en-US', {
+timeZone: tz.name,
+hour: '2-digit',
+minute: '2-digit',
+second: '2-digit',
+hour12: false
+});
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+timeZone: tz.name,
+year: 'numeric',
+month: 'short',
+day: 'numeric'
+});
+
+const timeString = formatter.format(now);
+const dateString = dateFormatter.format(now);
+
+document.getElementById(`clock-${tz.id}`).textContent = timeString;
+document.getElementById(`date-${tz.id}`).textContent = dateString;
+});
+}
+
+// Update clocks every second
+updateClocks();
+setInterval(updateClocks, 1000);
+</script>
 
 </body>
 </html>
