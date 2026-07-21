@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Q.R GAMING ZONE - PUBG Tournament</title>
+<title>Q.R GAMING ZONE - PUBG & Free Fire Tournament</title>
 
 <style>
 *{
@@ -87,6 +87,34 @@ margin:15px 0;
 font-size:22px;
 }
 
+/* Game Selection */
+.game-selection{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+max-width:600px;
+margin:0 auto 30px;
+}
+
+.game-btn{
+padding:20px;
+background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
+border:3px solid #ffb300;
+color:#ffb300;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+font-size:18px;
+transition:0.3s;
+}
+
+.game-btn:hover,
+.game-btn.active{
+background:#ffb300;
+color:black;
+transform:scale(1.05);
+}
+
 /* Modal Styles */
 .modal {
 display: none;
@@ -101,7 +129,7 @@ background-color: rgba(0,0,0,0.8);
 
 .modal-content {
 background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-margin: 10% auto;
+margin: 5% auto;
 padding: 30px;
 border: 2px solid #ffb300;
 border-radius: 15px;
@@ -142,7 +170,8 @@ font-weight: bold;
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
 width: 100%;
 padding: 12px;
 background: #0a0a0a;
@@ -154,7 +183,8 @@ font-family: Arial, sans-serif;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
 outline: none;
 box-shadow: 0 0 10px #ffb300;
 }
@@ -196,6 +226,60 @@ color: white;
 
 .cancel-btn:hover {
 background: #dd0000;
+}
+
+/* Game Info Cards */
+.game-info-cards{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+max-width:1000px;
+margin:0 auto 40px;
+}
+
+.game-card{
+background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
+padding:25px;
+border-radius:15px;
+border:3px solid #ffb300;
+box-shadow:0 0 20px rgba(255, 179, 0, 0.3);
+text-align:center;
+}
+
+.game-card h3{
+color:#ffb300;
+font-size:28px;
+margin-bottom:15px;
+}
+
+.game-card .prize{
+font-size:24px;
+color:#00ff00;
+font-weight:bold;
+margin:15px 0;
+}
+
+.game-card .entry{
+font-size:18px;
+color:#888;
+margin:10px 0;
+}
+
+.game-card .btn-register{
+margin-top:20px;
+padding:12px 25px;
+background:#ffb300;
+color:black;
+border:none;
+border-radius:5px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+font-size:16px;
+}
+
+.game-card .btn-register:hover{
+background:#ff9500;
 }
 
 /* Clock Styles */
@@ -378,21 +462,6 @@ line-height:1.6;
 
 .location-info strong{
 color:#00ff00;
-}
-
-.map-container{
-width:100%;
-height:400px;
-border-radius:10px;
-border:2px solid #ffb300;
-margin-top:20px;
-background:#1a1a1a;
-overflow:hidden;
-}
-
-#map{
-width:100%;
-height:100%;
 }
 
 /* Weather Styles */
@@ -592,6 +661,12 @@ margin: 20% auto;
 .form-buttons {
 grid-template-columns: 1fr;
 }
+.game-info-cards{
+grid-template-columns:1fr;
+}
+.game-selection{
+grid-template-columns:1fr;
+}
 }
 </style>
 
@@ -601,12 +676,50 @@ grid-template-columns: 1fr;
 <section class="hero">
 <div class="hero-content">
 <h1>Q.R GAMING ZONE</h1>
-<h2>PUBG ROOM TOURNAMENT</h2>
-<p>Winner Prize Rs. 5000</p>
-<p>Entry Fee Rs. 500</p>
-<button class="btn" onclick="openRegistrationModal()">
-Register Now
+<h2>PUBG & FREE FIRE TOURNAMENTS</h2>
+<p>Choose Your Game & Register Now!</p>
+<button class="btn" onclick="document.getElementById('gameSelection').scrollIntoView({behavior: 'smooth'})">
+🎮 Select Game
 </button>
+</div>
+</section>
+
+<!-- Game Selection Section -->
+<section class="section" id="gameSelection">
+<h2 style="color:#ffb300; margin-bottom:30px;">🎮 Choose Your Tournament</h2>
+
+<div class="game-info-cards">
+<!-- PUBG Card -->
+<div class="game-card">
+<h3>🎯 PUBG</h3>
+<div class="prize">Prize: Rs. 5000</div>
+<div class="entry">Entry Fee: Rs. 500</div>
+<p style="margin:15px 0; color:#888;">4v4 Squad Battle</p>
+<button class="btn-register" onclick="openRegistrationModal('pubg')">
+Register for PUBG
+</button>
+</div>
+
+<!-- Free Fire Card -->
+<div class="game-card">
+<h3>🔥 FREE FIRE</h3>
+<div class="prize">Prize: Rs. 3000</div>
+<div class="entry">Entry Fee: Rs. 300</div>
+<p style="margin:15px 0; color:#888;">1v1 Deathmatch</p>
+<button class="btn-register" onclick="openRegistrationModal('freefire')">
+Register for Free Fire
+</button>
+</div>
+</div>
+
+<div class="card" style="margin-top:40px;">
+<h2>Tournament Details</h2>
+<div class="info">🏆 PUBG - Winner Prize: Rs. 5000 | Entry: Rs. 500</div>
+<div class="info">🔥 FREE FIRE - Winner Prize: Rs. 3000 | Entry: Rs. 300</div>
+<div class="info">👥 Players: 50 - 100 Per Game</div>
+<div class="info">📞 Contact: 03096394084</div>
+<div class="info">📍 Sahiwal, Kot Khadam Ali Shah, Choki Wali Gali</div>
+<div class="info">📺 Live Spectator + Big Screen Setup</div>
 </div>
 </section>
 
@@ -614,9 +727,19 @@ Register Now
 <div id="registrationModal" class="modal">
 <div class="modal-content">
 <span class="close" onclick="closeRegistrationModal()">&times;</span>
-<h2>🎮 Tournament Registration</h2>
+<h2 id="modalTitle">🎮 Tournament Registration</h2>
 <div class="success-message" id="successMessage">✅ Registration submitted successfully!</div>
 <form id="registrationForm" onsubmit="submitRegistration(event)">
+
+<div class="form-group">
+<label for="gameType">Game *</label>
+<select id="gameType" name="gameType" required style="cursor:pointer;">
+<option value="">Select Game</option>
+<option value="pubg">PUBG</option>
+<option value="freefire">Free Fire</option>
+</select>
+</div>
+
 <div class="form-group">
 <label for="fullName">Full Name *</label>
 <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
@@ -633,8 +756,13 @@ Register Now
 </div>
 
 <div class="form-group">
-<label for="playerName">In-Game Name (PUBG) *</label>
-<input type="text" id="playerName" name="playerName" required placeholder="Your PUBG username">
+<label for="playerName">In-Game Name *</label>
+<input type="text" id="playerName" name="playerName" required placeholder="Your game username">
+</div>
+
+<div class="form-group">
+<label for="playerID">Player ID / UID *</label>
+<input type="text" id="playerID" name="playerID" required placeholder="Your game ID number">
 </div>
 
 <div class="form-group">
@@ -644,7 +772,7 @@ Register Now
 
 <div class="form-group">
 <label for="experience">Gaming Experience *</label>
-<select id="experience" name="experience" required style="width: 100%; padding: 12px; background: #0a0a0a; border: 2px solid #ffb300; color: white; border-radius: 5px;">
+<select id="experience" name="experience" required style="cursor:pointer;">
 <option value="">Select Experience Level</option>
 <option value="beginner">Beginner (0-1 year)</option>
 <option value="intermediate">Intermediate (1-3 years)</option>
@@ -660,7 +788,7 @@ Register Now
 
 <div class="form-group">
 <input type="checkbox" id="terms" name="terms" required>
-<label for="terms" style="display: inline; margin-left: 8px;">I agree to the tournament rules</label>
+<label for="terms" style="display: inline; margin-left: 8px;">I agree to the tournament rules and regulations</label>
 </div>
 
 <div class="form-buttons">
@@ -670,20 +798,6 @@ Register Now
 </form>
 </div>
 </div>
-
-<section class="section">
-<div class="card">
-<h2>Tournament Details</h2>
-
-<div class="info">🏆 Winner Prize: Rs. 5000</div>
-<div class="info">🎟 Entry Fee: Rs. 500</div>
-<div class="info">👥 Players: 50 - 100</div>
-<div class="info">📞 Contact: 03096394084</div>
-<div class="info">📍 Sahiwal, Kot Khadam Ali Shah, Choki Wali Gali</div>
-<div class="info">📺 Live Spectator + Big Screen Setup</div>
-
-</div>
-</section>
 
 <!-- World Clock Section -->
 <section class="clock-section">
@@ -795,20 +909,31 @@ Register Now
 
 <footer>
 <h3>Q.R GAMING ZONE</h3>
-<p>Powered by PUBG Esports Tournament</p>
-<p style="margin-top:10px; font-size:12px;">⏰ Live Tournament Countdown Clock | 📍 Gaming Zone Finder | 🌤️ Weather Dashboard | 📋 Online Registration</p>
+<p>Powered by PUBG & Free Fire Esports Tournaments</p>
+<p style="margin-top:10px; font-size:12px;">⏰ Live Tournament Clock | 📍 Gaming Zone Finder | 🌤️ Weather Dashboard | 📋 Online Registration</p>
 </footer>
 
 <script>
+let currentGameType = '';
+
 // Registration Modal Functions
-function openRegistrationModal() {
+function openRegistrationModal(gameType) {
+currentGameType = gameType;
 document.getElementById('registrationModal').style.display = 'block';
 document.getElementById('successMessage').style.display = 'none';
+document.getElementById('gameType').value = gameType;
+
+if (gameType === 'pubg') {
+document.getElementById('modalTitle').textContent = '🎯 PUBG Tournament Registration';
+} else if (gameType === 'freefire') {
+document.getElementById('modalTitle').textContent = '🔥 Free Fire Tournament Registration';
+}
 }
 
 function closeRegistrationModal() {
 document.getElementById('registrationModal').style.display = 'none';
 document.getElementById('registrationForm').reset();
+currentGameType = '';
 }
 
 window.onclick = function(event) {
@@ -822,10 +947,12 @@ function submitRegistration(event) {
 event.preventDefault();
 
 const formData = {
+gameType: document.getElementById('gameType').value,
 fullName: document.getElementById('fullName').value,
 email: document.getElementById('email').value,
 phone: document.getElementById('phone').value,
 playerName: document.getElementById('playerName').value,
+playerID: document.getElementById('playerID').value,
 team: document.getElementById('team').value,
 experience: document.getElementById('experience').value,
 message: document.getElementById('message').value,
@@ -837,7 +964,7 @@ let registrations = JSON.parse(localStorage.getItem('qrGamingRegistrations') || 
 registrations.push(formData);
 localStorage.setItem('qrGamingRegistrations', JSON.stringify(registrations));
 
-// Send email via FormSubmit.co (free service)
+// Send email via FormSubmit.co
 fetch('https://formsubmit.co/stongordon@gmail.com', {
 method: 'POST',
 body: new FormData(document.getElementById('registrationForm')),
@@ -846,12 +973,10 @@ headers: {
 }
 }).then(response => {
 if (response.ok) {
-// Show success message
 document.getElementById('registrationForm').style.display = 'none';
 document.getElementById('successMessage').style.display = 'block';
 document.getElementById('successMessage').innerHTML = '✅ Registration submitted successfully!<br>Check your email for confirmation.<br>We will contact you soon!';
 
-// Reset form after 3 seconds
 setTimeout(() => {
 closeRegistrationModal();
 document.getElementById('registrationForm').style.display = 'block';
@@ -930,7 +1055,7 @@ city: 'Sahiwal',
 contact: '03096394084',
 lat: 30.1967,
 lng: 72.6372,
-details: 'Main Gaming Hub - PUBG Tournaments',
+details: 'Main Gaming Hub - PUBG & Free Fire Tournaments',
 rating: '⭐⭐⭐⭐⭐'
 },
 {
