@@ -19,16 +19,19 @@ color:white;
 overflow-x: hidden;
 }
 
-/* Hero Section - Split Background */
+/* Hero Section - PUBG Battle Royale Theme */
 .hero{
 height:100vh;
-background:linear-gradient(90deg, 
-rgba(0,0,0,0.8) 0%, 
-rgba(0,0,0,0.8) 50%, 
-rgba(0,0,0,0.8) 100%),
-url('https://images.unsplash.com/photo-1538481143235-5d630a003475?w=1200');
-background-size:cover;
-background-position:center;
+background:linear-gradient(45deg, 
+rgba(0,0,0,0.7) 0%, 
+rgba(20,10,0,0.7) 25%,
+rgba(10,0,20,0.7) 75%,
+rgba(0,0,0,0.7) 100%),
+url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4"/></filter></defs><rect width="1200" height="800" fill="%23000"/><rect width="1200" height="800" fill="%23333" opacity="0.03" filter="url(%23noise)"/><line x1="0" y1="200" x2="1200" y2="200" stroke="%23ff6b00" stroke-width="2" opacity="0.1"/><line x1="0" y1="400" x2="1200" y2="400" stroke="%23ffb300" stroke-width="1" opacity="0.05"/><line x1="300" y1="0" x2="300" y2="800" stroke="%23ff6b00" stroke-width="1" opacity="0.08"/><line x1="600" y1="0" x2="600" y2="800" stroke="%23ff6b00" stroke-width="2" opacity="0.1"/><line x1="900" y1="0" x2="900" y2="800" stroke="%23ff6b00" stroke-width="1" opacity="0.08"/><circle cx="150" cy="150" r="100" fill="%23ff6b00" opacity="0.03"/><circle cx="1050" cy="650" r="120" fill="%23ffb300" opacity="0.02"/><polygon points="600,50 700,150 500,150" fill="%23ff6b00" opacity="0.05"/></svg>'),
+linear-gradient(135deg, #1a0a0a 0%, #2d1a0a 50%, #1a0a2d 100%);
+background-size: cover, cover, cover;
+background-position: center, center, center;
+background-attachment: fixed;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -44,14 +47,41 @@ top:0;
 left:0;
 right:0;
 bottom:0;
-background: linear-gradient(45deg, rgba(255, 179, 0, 0.1) 0%, rgba(255, 50, 0, 0.1) 50%, rgba(100, 200, 255, 0.1) 100%);
+background: 
+radial-gradient(circle at 20% 30%, rgba(255, 107, 0, 0.15) 0%, transparent 50%),
+radial-gradient(circle at 80% 70%, rgba(255, 179, 0, 0.1) 0%, transparent 50%),
+linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
 pointer-events:none;
-animation: gradientShift 8s ease infinite;
+animation: pubgPulse 6s ease-in-out infinite;
 }
 
-@keyframes gradientShift {
-0%, 100% { opacity: 0.3; }
-50% { opacity: 0.6; }
+@keyframes pubgPulse {
+0%, 100% { opacity: 0.8; }
+50% { opacity: 1; }
+}
+
+.hero::after {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background-image: 
+repeating-linear-gradient(
+0deg,
+rgba(255, 107, 0, 0.03) 0px,
+rgba(255, 107, 0, 0.03) 2px,
+transparent 2px,
+transparent 4px
+);
+pointer-events:none;
+animation: scanlines 8s linear infinite;
+}
+
+@keyframes scanlines {
+0% { transform: translateY(0); }
+100% { transform: translateY(10px); }
 }
 
 .hero-content {
@@ -67,46 +97,60 @@ to { opacity: 1; transform: translateY(0); }
 
 .hero-content h1{
 font-size:70px;
-color:#ffb300;
-text-shadow: 0 0 20px #ffb300, 0 0 40px #ff6b00;
+color:#ff6b00;
+text-shadow: 0 0 30px #ff6b00, 0 0 60px #ffb300, inset 0 0 20px rgba(255,107,0,0.3);
 font-weight:900;
-letter-spacing:3px;
+letter-spacing:4px;
 margin-bottom:10px;
+font-family: 'Arial Black', sans-serif;
+animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+0%, 100% { text-shadow: 0 0 30px #ff6b00, 0 0 60px #ffb300; }
+50% { text-shadow: 0 0 30px #ff6b00, 0 0 60px #ffb300, 2px 2px 0 #ff6b00; }
 }
 
 .hero-content h2{
-font-size:40px;
+font-size:42px;
 margin:15px 0;
-color:#fff;
-text-shadow: 0 0 15px #00ff88;
+color:#ffb300;
+text-shadow: 0 0 20px #ff6b00, 0 0 10px #ffb300;
+letter-spacing:2px;
+font-weight:bold;
 }
 
 .hero-content p{
-font-size:22px;
-margin:10px 0;
+font-size:24px;
+margin:15px 0;
 color:#00ff88;
-text-shadow: 0 0 10px #00ff88;
+text-shadow: 0 0 15px #00ff88, 0 0 5px #00ff00;
+letter-spacing:1px;
 }
 
 .btn{
 display:inline-block;
-margin-top:20px;
-padding:15px 35px;
-background:linear-gradient(135deg, #ffb300, #ff6b00);
+margin-top:25px;
+padding:18px 45px;
+background:linear-gradient(135deg, #ff6b00, #ffb300);
 color:black;
 text-decoration:none;
-font-weight:bold;
-border-radius:8px;
+font-weight:900;
+border-radius:0;
 transition: 0.3s;
-border:2px solid #ffb300;
+border:3px solid #ffb300;
 cursor:pointer;
-box-shadow: 0 0 20px #ffb300;
+box-shadow: 0 0 30px #ff6b00, inset 0 0 10px rgba(255,179,0,0.3);
+letter-spacing:2px;
+text-transform: uppercase;
+font-size:16px;
+clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .btn:hover{
-background:linear-gradient(135deg, #ff6b00, #ffb300);
-transform:scale(1.1);
-box-shadow: 0 0 30px #ff6b00;
+background:linear-gradient(135deg, #ffb300, #ff6b00);
+transform:scale(1.08);
+box-shadow: 0 0 50px #ff6b00, 0 0 20px #ffb300;
 }
 
 .section{
@@ -117,29 +161,46 @@ text-align:center;
 .card{
 max-width:700px;
 margin:auto;
-background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
+background:linear-gradient(135deg, rgba(26,26,26,0.9), rgba(45,45,45,0.9));
 padding:30px;
-border-radius:10px;
-box-shadow:0 0 20px #ffb300;
-border:2px solid #ffb300;
+border-radius:0;
+box-shadow:0 0 30px rgba(255,107,0,0.4);
+border:3px solid #ff6b00;
+position:relative;
+clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+}
+
+.card::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background: linear-gradient(90deg, transparent 0%, rgba(255,107,0,0.1) 50%, transparent 100%);
+pointer-events:none;
 }
 
 .card h2{
 color:#ffb300;
 margin-bottom:20px;
-text-shadow: 0 0 10px #ffb300;
+text-shadow: 0 0 10px #ff6b00;
+font-size:28px;
+letter-spacing:2px;
 }
 
 .info{
 margin:15px 0;
-font-size:22px;
+font-size:20px;
 color:#00ff88;
+text-shadow: 0 0 8px #00ff88;
 }
 
 /* Game Selection */
 .game-section {
-background: linear-gradient(135deg, #1a0a0a 0%, #2d1a0a 100%);
+background: linear-gradient(135deg, #1a0a0a 0%, #2d1a0a 50%, #1a0a1a 100%);
 position:relative;
+overflow:hidden;
 }
 
 .game-section::before {
@@ -150,8 +211,9 @@ left:0;
 right:0;
 bottom:0;
 background-image: 
-radial-gradient(circle at 20% 50%, rgba(255, 179, 0, 0.1) 0%, transparent 50%),
-radial-gradient(circle at 80% 80%, rgba(255, 107, 0, 0.1) 0%, transparent 50%);
+radial-gradient(circle at 20% 50%, rgba(255, 107, 0, 0.1) 0%, transparent 50%),
+radial-gradient(circle at 80% 80%, rgba(255, 179, 0, 0.08) 0%, transparent 50%),
+repeating-linear-gradient(90deg, transparent 0px, rgba(255, 107, 0, 0.02) 1px, transparent 2px);
 pointer-events:none;
 }
 
@@ -167,16 +229,18 @@ z-index:2;
 
 .game-btn{
 padding:20px;
-background:linear-gradient(135deg, #2d1a0a, #3d2a1a);
-border:3px solid #ffb300;
+background:linear-gradient(135deg, rgba(45,26,10,0.9), rgba(61,42,26,0.9));
+border:3px solid #ff6b00;
 color:#ffb300;
-border-radius:10px;
+border-radius:0;
 cursor:pointer;
 font-weight:bold;
 font-size:18px;
 transition:0.3s;
 position:relative;
 overflow:hidden;
+clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+letter-spacing:1px;
 }
 
 .game-btn::before {
@@ -186,7 +250,7 @@ top:-50%;
 left:-50%;
 width:200%;
 height:200%;
-background: linear-gradient(45deg, transparent 30%, rgba(255, 179, 0, 0.2) 50%, transparent 70%);
+background: linear-gradient(45deg, transparent 30%, rgba(255, 179, 0, 0.3) 50%, transparent 70%);
 transform: rotate(45deg);
 animation: shine 3s infinite;
 }
@@ -198,10 +262,10 @@ animation: shine 3s infinite;
 
 .game-btn:hover,
 .game-btn.active{
-background:linear-gradient(135deg, #ffb300, #ff6b00);
+background:linear-gradient(135deg, #ff6b00, #ffb300);
 color:black;
 transform:scale(1.05);
-box-shadow: 0 0 30px #ffb300;
+box-shadow: 0 0 40px #ff6b00;
 }
 
 /* Game Info Cards */
@@ -216,46 +280,48 @@ z-index:2;
 }
 
 .game-card{
-background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
+background:linear-gradient(135deg, rgba(26,26,26,0.9), rgba(45,45,45,0.9));
 padding:30px;
-border-radius:15px;
-border:3px solid #ffb300;
-box-shadow:0 0 30px rgba(255, 179, 0, 0.3);
+border-radius:0;
+border:3px solid #ff6b00;
+box-shadow:0 0 40px rgba(255, 107, 0, 0.4);
 text-align:center;
 position:relative;
 overflow:hidden;
 transition:0.3s;
+clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
 }
 
 .game-card::before {
 content:'';
 position:absolute;
-top:-50%;
-left:-50%;
-width:200%;
-height:200%;
-background: radial-gradient(circle, rgba(255, 179, 0, 0.1) 0%, transparent 70%);
+top:0;
+left:0;
+right:0;
+bottom:0;
+background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
 pointer-events:none;
 }
 
 .game-card:hover {
 transform: translateY(-10px);
-box-shadow:0 0 50px rgba(255, 179, 0, 0.5);
+box-shadow:0 0 60px rgba(255, 107, 0, 0.6);
 }
 
 .game-card h3{
-color:#ffb300;
+color:#ff6b00;
 font-size:32px;
 margin-bottom:15px;
-text-shadow: 0 0 10px #ffb300;
+text-shadow: 0 0 15px #ff6b00;
+letter-spacing:2px;
 }
 
 .game-card .prize{
-font-size:26px;
-color:#00ff88;
+font-size:28px;
+color:#ffb300;
 font-weight:bold;
 margin:15px 0;
-text-shadow: 0 0 10px #00ff88;
+text-shadow: 0 0 12px #ff6b00;
 }
 
 .game-card .entry{
@@ -266,28 +332,31 @@ margin:10px 0;
 
 .game-card .details {
 font-size:14px;
-color:#888;
+color:#00ff88;
 margin:15px 0;
 }
 
 .game-card .btn-register{
 margin-top:20px;
-padding:12px 25px;
-background:linear-gradient(135deg, #ffb300, #ff6b00);
+padding:14px 30px;
+background:linear-gradient(135deg, #ff6b00, #ffb300);
 color:black;
 border:none;
-border-radius:8px;
+border-radius:0;
 font-weight:bold;
 cursor:pointer;
 transition:0.3s;
 font-size:16px;
-box-shadow: 0 0 15px #ffb300;
+box-shadow: 0 0 20px #ff6b00;
+letter-spacing:1px;
+text-transform: uppercase;
+clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
 }
 
 .game-card .btn-register:hover{
-background:linear-gradient(135deg, #ff6b00, #ffb300);
+background:linear-gradient(135deg, #ffb300, #ff6b00);
 transform:scale(1.05);
-box-shadow: 0 0 25px #ff6b00;
+box-shadow: 0 0 35px #ff6b00;
 }
 
 /* Modal Styles */
@@ -299,20 +368,33 @@ left: 0;
 top: 0;
 width: 100%;
 height: 100%;
-background-color: rgba(0,0,0,0.9);
+background-color: rgba(0,0,0,0.95);
 }
 
 .modal-content {
-background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+background: linear-gradient(135deg, rgba(26,26,26,0.95), rgba(45,45,45,0.95));
 margin: 5% auto;
 padding: 30px;
-border: 3px solid #ffb300;
-border-radius: 15px;
+border: 3px solid #ff6b00;
+border-radius: 0;
 width: 90%;
 max-width: 600px;
-box-shadow: 0 0 50px rgba(255, 179, 0, 0.5);
+box-shadow: 0 0 60px rgba(255, 107, 0, 0.6);
 max-height: 90vh;
 overflow-y: auto;
+position:relative;
+clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+}
+
+.modal-content::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background: linear-gradient(90deg, transparent 0%, rgba(255,107,0,0.05) 50%, transparent 100%);
+pointer-events:none;
 }
 
 .close {
@@ -324,14 +406,15 @@ cursor: pointer;
 }
 
 .close:hover {
-color: #ff9500;
+color: #ff6b00;
 }
 
 .modal h2 {
-color: #ffb300;
+color: #ff6b00;
 margin-bottom: 20px;
 text-align: center;
-text-shadow: 0 0 10px #ffb300;
+text-shadow: 0 0 15px #ff6b00;
+letter-spacing:2px;
 }
 
 .form-group {
@@ -343,6 +426,7 @@ display: block;
 margin-bottom: 8px;
 color: #ffb300;
 font-weight: bold;
+letter-spacing:1px;
 }
 
 .form-group input,
@@ -350,10 +434,10 @@ font-weight: bold;
 .form-group select {
 width: 100%;
 padding: 12px;
-background: #0a0a0a;
-border: 2px solid #ffb300;
+background: rgba(10,10,10,0.8);
+border: 2px solid #ff6b00;
 color: white;
-border-radius: 5px;
+border-radius: 0;
 font-size: 14px;
 font-family: Arial, sans-serif;
 }
@@ -362,7 +446,7 @@ font-family: Arial, sans-serif;
 .form-group textarea:focus,
 .form-group select:focus {
 outline: none;
-box-shadow: 0 0 15px #ffb300;
+box-shadow: 0 0 20px #ff6b00, inset 0 0 10px rgba(255,107,0,0.1);
 }
 
 .form-group textarea {
@@ -380,26 +464,29 @@ margin-top: 25px;
 .form-btn {
 padding: 12px;
 border: none;
-border-radius: 5px;
+border-radius: 0;
 font-weight: bold;
 cursor: pointer;
 transition: 0.3s;
+letter-spacing:1px;
+text-transform: uppercase;
 }
 
 .submit-btn {
 background: linear-gradient(135deg, #00ff88, #00dd00);
 color: black;
-box-shadow: 0 0 15px #00ff88;
+box-shadow: 0 0 20px #00ff88;
 }
 
 .submit-btn:hover {
 background: linear-gradient(135deg, #00dd00, #00ff88);
-box-shadow: 0 0 25px #00ff88;
+box-shadow: 0 0 30px #00ff88;
 }
 
 .cancel-btn {
 background: linear-gradient(135deg, #ff4444, #dd0000);
 color: white;
+box-shadow: 0 0 15px #ff4444;
 }
 
 .cancel-btn:hover {
@@ -409,7 +496,7 @@ background: linear-gradient(135deg, #dd0000, #ff4444);
 /* Clock Styles */
 .clock-section{
 padding:60px 20px;
-background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+background: linear-gradient(135deg, #0a0a0a 0%, #1a1a0a 100%);
 position:relative;
 }
 
@@ -421,8 +508,8 @@ left:0;
 right:0;
 bottom:0;
 background-image:
-radial-gradient(circle at 30% 30%, rgba(0, 255, 136, 0.05) 0%, transparent 50%),
-radial-gradient(circle at 70% 70%, rgba(255, 107, 0, 0.05) 0%, transparent 50%);
+radial-gradient(circle at 30% 30%, rgba(255, 107, 0, 0.05) 0%, transparent 50%),
+radial-gradient(circle at 70% 70%, rgba(255, 179, 0, 0.03) 0%, transparent 50%);
 pointer-events:none;
 }
 
@@ -437,22 +524,23 @@ z-index:2;
 }
 
 .clock-card{
-background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
+background:linear-gradient(135deg, rgba(26,26,26,0.9), rgba(45,45,45,0.9));
 padding:25px;
-border-radius:15px;
-border:2px solid #00ff88;
-box-shadow:0 0 20px rgba(0, 255, 136, 0.3);
+border-radius:0;
+border:2px solid #ffb300;
+box-shadow:0 0 30px rgba(255, 179, 0, 0.3);
 transition:transform 0.3s;
+clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .clock-card:hover{
 transform:translateY(-5px);
-box-shadow:0 0 40px rgba(0, 255, 136, 0.5);
+box-shadow:0 0 50px rgba(255, 179, 0, 0.5);
 }
 
 .timezone-name{
 font-size:18px;
-color:#00ff88;
+color:#ffb300;
 font-weight:bold;
 margin-bottom:10px;
 }
@@ -475,16 +563,17 @@ margin-top:10px;
 
 .clock-title{
 text-align:center;
-color:#00ff88;
+color:#ffb300;
 font-size:28px;
 margin-bottom:40px;
-text-shadow: 0 0 15px #00ff88;
+text-shadow: 0 0 15px #ff6b00;
+letter-spacing:2px;
 }
 
 /* Location Finder Styles */
 .location-section{
 padding:60px 20px;
-background: linear-gradient(135deg, #0a0a0a, #1a1a0a);
+background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 100%);
 position:relative;
 }
 
@@ -496,18 +585,19 @@ left:0;
 right:0;
 bottom:0;
 background-image:
-radial-gradient(circle at 50% 50%, rgba(255, 179, 0, 0.05) 0%, transparent 50%);
+radial-gradient(circle at 50% 50%, rgba(255, 107, 0, 0.05) 0%, transparent 50%);
 pointer-events:none;
 }
 
 .location-title{
 text-align:center;
-color:#ffb300;
+color:#ff6b00;
 font-size:28px;
 margin-bottom:30px;
-text-shadow: 0 0 10px #ffb300;
+text-shadow: 0 0 15px #ff6b00;
 position:relative;
 z-index:2;
+letter-spacing:2px;
 }
 
 .location-tabs{
@@ -522,23 +612,24 @@ z-index:2;
 
 .tab-btn{
 padding:12px 25px;
-background:#1a1a1a;
-border:2px solid #ffb300;
+background:rgba(26,26,26,0.8);
+border:2px solid #ff6b00;
 color:#ffb300;
-border-radius:5px;
+border-radius:0;
 cursor:pointer;
 font-weight:bold;
 transition:0.3s;
+letter-spacing:1px;
 }
 
 .tab-btn.active{
-background:#ffb300;
+background:#ff6b00;
 color:black;
-box-shadow: 0 0 15px #ffb300;
+box-shadow: 0 0 20px #ff6b00;
 }
 
 .tab-btn:hover{
-background:#ffb300;
+background:#ff6b00;
 color:black;
 }
 
@@ -554,26 +645,27 @@ z-index:2;
 .search-container input{
 flex:1;
 padding:12px;
-background:#1a1a1a;
-border:2px solid #ffb300;
+background:rgba(26,26,26,0.8);
+border:2px solid #ff6b00;
 color:white;
-border-radius:5px;
+border-radius:0;
 font-size:16px;
 }
 
 .search-container button{
 padding:12px 25px;
-background:#ffb300;
+background:#ff6b00;
 color:black;
 border:none;
-border-radius:5px;
+border-radius:0;
 font-weight:bold;
 cursor:pointer;
 transition:0.3s;
+letter-spacing:1px;
 }
 
 .search-container button:hover{
-background:#ff9500;
+background:#ffb300;
 }
 
 .location-btn{
@@ -581,7 +673,7 @@ padding:8px 15px;
 background:#00ff88;
 color:black;
 border:none;
-border-radius:5px;
+border-radius:0;
 font-weight:bold;
 cursor:pointer;
 margin-top:10px;
@@ -603,16 +695,17 @@ z-index:2;
 }
 
 .location-card{
-background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
+background:linear-gradient(135deg, rgba(26,26,26,0.9), rgba(45,45,45,0.9));
 padding:25px;
-border-radius:15px;
-border:2px solid #ffb300;
-box-shadow:0 0 20px rgba(255, 179, 0, 0.3);
+border-radius:0;
+border:2px solid #ff6b00;
+box-shadow:0 0 30px rgba(255, 107, 0, 0.3);
+clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .location-name{
 font-size:22px;
-color:#ffb300;
+color:#ff6b00;
 font-weight:bold;
 margin-bottom:15px;
 }
@@ -631,7 +724,7 @@ color:#00ff88;
 /* Weather Styles */
 .weather-section{
 padding:60px 20px;
-background: linear-gradient(135deg, #0a0a0a, #1a0a1a);
+background: linear-gradient(135deg, #0a0a0a 0%, #0a0a1a 100%);
 position:relative;
 }
 
@@ -649,12 +742,13 @@ pointer-events:none;
 
 .weather-title{
 text-align:center;
-color:#00ccff;
+color:#ffb300;
 font-size:28px;
 margin-bottom:30px;
-text-shadow: 0 0 10px #00ccff;
+text-shadow: 0 0 15px #ff6b00;
 position:relative;
 z-index:2;
+letter-spacing:2px;
 }
 
 .weather-search{
@@ -669,26 +763,26 @@ z-index:2;
 .weather-search input{
 flex:1;
 padding:12px;
-background:#1a1a1a;
-border:2px solid #00ccff;
+background:rgba(26,26,26,0.8);
+border:2px solid #ffb300;
 color:white;
-border-radius:5px;
+border-radius:0;
 font-size:16px;
 }
 
 .weather-search button{
 padding:12px 25px;
-background:#00ccff;
+background:#ffb300;
 color:black;
 border:none;
-border-radius:5px;
+border-radius:0;
 font-weight:bold;
 cursor:pointer;
 transition:0.3s;
 }
 
 .weather-search button:hover{
-background:#0099ff;
+background:#ff6b00;
 }
 
 .weather-container{
@@ -702,17 +796,18 @@ z-index:2;
 }
 
 .weather-card{
-background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
+background:linear-gradient(135deg, rgba(26,26,26,0.9), rgba(45,45,45,0.9));
 padding:30px;
-border-radius:15px;
-border:2px solid #00ccff;
-box-shadow:0 0 20px rgba(0, 200, 255, 0.3);
+border-radius:0;
+border:2px solid #ffb300;
+box-shadow:0 0 30px rgba(255, 179, 0, 0.3);
 text-align:center;
+clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .city-name{
 font-size:24px;
-color:#00ccff;
+color:#ffb300;
 font-weight:bold;
 margin-bottom:15px;
 }
@@ -742,13 +837,13 @@ grid-template-columns:1fr 1fr;
 gap:15px;
 margin-top:20px;
 padding-top:20px;
-border-top:1px solid #00ccff;
+border-top:1px solid #ffb300;
 }
 
 .detail-item{
-background:#0a0a0a;
+background:rgba(10,10,10,0.8);
 padding:10px;
-border-radius:5px;
+border-radius:0;
 }
 
 .detail-label{
@@ -758,7 +853,7 @@ color:#888;
 
 .detail-value{
 font-size:18px;
-color:#00ccff;
+color:#ffb300;
 font-weight:bold;
 }
 
@@ -770,10 +865,10 @@ margin-top:30px;
 }
 
 .forecast-item{
-background:#0a0a0a;
+background:rgba(10,10,10,0.8);
 padding:15px;
-border-radius:10px;
-border:1px solid #00ccff;
+border-radius:0;
+border:1px solid #ffb300;
 text-align:center;
 }
 
@@ -790,20 +885,21 @@ margin:10px 0;
 
 .forecast-temp{
 font-size:14px;
-color:#00ccff;
+color:#ffb300;
 }
 
 footer{
-background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
 padding:20px;
 text-align:center;
-border-top:3px solid #ffb300;
-box-shadow: 0 -10px 30px rgba(255, 179, 0, 0.2);
+border-top:3px solid #ff6b00;
+box-shadow: 0 -10px 40px rgba(255, 107, 0, 0.3);
 }
 
 footer h3 {
-color:#ffb300;
-text-shadow: 0 0 10px #ffb300;
+color:#ff6b00;
+text-shadow: 0 0 15px #ff6b00;
+letter-spacing:2px;
 }
 
 footer p {
@@ -823,11 +919,11 @@ display: none;
 background: linear-gradient(135deg, #00ff88, #00dd00);
 color: black;
 padding: 15px;
-border-radius: 5px;
+border-radius: 0;
 margin-bottom: 20px;
 text-align: center;
 font-weight: bold;
-box-shadow: 0 0 20px #00ff88;
+box-shadow: 0 0 30px #00ff88;
 }
 
 @media (max-width: 768px){
@@ -872,10 +968,10 @@ grid-template-columns:1fr;
 <div class="hero-content">
 <h1>Q.R GAMING ZONE</h1>
 <h2>🎯 PUBG vs 🔥 FREE FIRE</h2>
-<p>ESPORTS TOURNAMENTS 2026</p>
-<p>Choose Your Game & Register Now!</p>
+<p>BATTLE ROYALE TOURNAMENTS 2026</p>
+<p>TACTICAL GAMEPLAY • EXTREME ACTION</p>
 <button class="btn" onclick="document.getElementById('gameSelection').scrollIntoView({behavior: 'smooth'})">
-🎮 SELECT GAME
+⚔️ ENTER BATTLE ⚔️
 </button>
 </div>
 </section>
@@ -883,7 +979,7 @@ grid-template-columns:1fr;
 <!-- Game Selection Section -->
 <section class="game-section" id="gameSelection">
 <div class="section">
-<h2 style="color:#ffb300; margin-bottom:30px; text-shadow: 0 0 15px #ffb300; font-size:32px;">🎮 Choose Your Tournament</h2>
+<h2 style="color:#ff6b00; margin-bottom:30px; text-shadow: 0 0 20px #ff6b00; font-size:32px; letter-spacing:2px;">🎮 CHOOSE YOUR ARENA</h2>
 
 <div class="game-info-cards">
 <!-- PUBG Card -->
@@ -891,9 +987,9 @@ grid-template-columns:1fr;
 <h3>🎯 PUBG</h3>
 <div class="prize">Rs. 5000</div>
 <div class="entry">Entry Fee: Rs. 500</div>
-<div class="details">4v4 Squad Battle • Tactical Gameplay</div>
+<div class="details">4v4 Squad Warfare • Strategic Gameplay</div>
 <button class="btn-register" onclick="openRegistrationModal('pubg')">
-🎯 Register for PUBG
+🎯 DEPLOY FOR PUBG
 </button>
 </div>
 
@@ -902,21 +998,21 @@ grid-template-columns:1fr;
 <h3>🔥 FREE FIRE</h3>
 <div class="prize">Rs. 3000</div>
 <div class="entry">Entry Fee: Rs. 300</div>
-<div class="details">1v1 Deathmatch • Fast-Paced Action</div>
+<div class="details">1v1 Deathmatch • Lightning Fast Action</div>
 <button class="btn-register" onclick="openRegistrationModal('freefire')">
-🔥 Register for Free Fire
+🔥 DEPLOY FOR FREE FIRE
 </button>
 </div>
 </div>
 
 <div class="card" style="margin-top:40px;">
-<h2>Tournament Details</h2>
+<h2>⚔️ TOURNAMENT DETAILS ⚔️</h2>
 <div class="info">🎯 PUBG - Prize: Rs. 5000 | Entry: Rs. 500</div>
 <div class="info">🔥 FREE FIRE - Prize: Rs. 3000 | Entry: Rs. 300</div>
-<div class="info">👥 Players: 50 - 100 Per Game</div>
-<div class="info">📞 Contact: 03096394084</div>
-<div class="info">📍 Sahiwal, Kot Khadam Ali Shah, Choki Wali Gali</div>
-<div class="info">📺 Live Spectator + Big Screen Setup</div>
+<div class="info">👥 Fighters: 50 - 100 Per Arena</div>
+<div class="info">📞 Command Center: 03096394084</div>
+<div class="info">📍 Base: Sahiwal, Kot Khadam Ali Shah, Choki Wali Gali</div>
+<div class="info">📺 Live Combat Feed + Stadium Screen Setup</div>
 </div>
 </div>
 </section>
@@ -925,22 +1021,22 @@ grid-template-columns:1fr;
 <div id="registrationModal" class="modal">
 <div class="modal-content">
 <span class="close" onclick="closeRegistrationModal()">&times;</span>
-<h2 id="modalTitle">🎮 Tournament Registration</h2>
-<div class="success-message" id="successMessage">✅ Registration submitted successfully!</div>
+<h2 id="modalTitle">⚔️ COMBAT REGISTRATION ⚔️</h2>
+<div class="success-message" id="successMessage">✅ Soldier registered successfully!</div>
 <form id="registrationForm" onsubmit="submitRegistration(event)">
 
 <div class="form-group">
-<label for="gameType">Game *</label>
+<label for="gameType">SELECT ARENA *</label>
 <select id="gameType" name="gameType" required style="cursor:pointer;">
-<option value="">Select Game</option>
-<option value="pubg">PUBG</option>
-<option value="freefire">Free Fire</option>
+<option value="">Choose Arena</option>
+<option value="pubg">PUBG Squad Warfare</option>
+<option value="freefire">Free Fire Deathmatch</option>
 </select>
 </div>
 
 <div class="form-group">
-<label for="fullName">Full Name *</label>
-<input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+<label for="fullName">Soldier Name *</label>
+<input type="text" id="fullName" name="fullName" required placeholder="Enter your name">
 </div>
 
 <div class="form-group">
@@ -949,49 +1045,49 @@ grid-template-columns:1fr;
 </div>
 
 <div class="form-group">
-<label for="phone">Phone Number *</label>
+<label for="phone">Combat Contact *</label>
 <input type="tel" id="phone" name="phone" required placeholder="03001234567">
 </div>
 
 <div class="form-group">
-<label for="playerName">In-Game Name *</label>
+<label for="playerName">Battle Codename *</label>
 <input type="text" id="playerName" name="playerName" required placeholder="Your game username">
 </div>
 
 <div class="form-group">
-<label for="playerID">Player ID / UID *</label>
-<input type="text" id="playerID" name="playerID" required placeholder="Your game ID number">
+<label for="playerID">Soldier ID / UID *</label>
+<input type="text" id="playerID" name="playerID" required placeholder="Your game ID">
 </div>
 
 <div class="form-group">
-<label for="team">Team Name (if any)</label>
-<input type="text" id="team" name="team" placeholder="Your team name">
+<label for="team">Squad Name (if any)</label>
+<input type="text" id="team" name="team" placeholder="Your squad name">
 </div>
 
 <div class="form-group">
-<label for="experience">Gaming Experience *</label>
+<label for="experience">Combat Experience *</label>
 <select id="experience" name="experience" required style="cursor:pointer;">
-<option value="">Select Experience Level</option>
-<option value="beginner">Beginner (0-1 year)</option>
-<option value="intermediate">Intermediate (1-3 years)</option>
-<option value="advanced">Advanced (3+ years)</option>
-<option value="professional">Professional</option>
+<option value="">Select Level</option>
+<option value="beginner">Recruit (0-1 year)</option>
+<option value="intermediate">Soldier (1-3 years)</option>
+<option value="advanced">Commando (3+ years)</option>
+<option value="professional">Special Forces</option>
 </select>
 </div>
 
 <div class="form-group">
-<label for="message">Additional Info / Message</label>
+<label for="message">Additional Intel</label>
 <textarea id="message" name="message" placeholder="Any additional information..."></textarea>
 </div>
 
 <div class="form-group">
 <input type="checkbox" id="terms" name="terms" required>
-<label for="terms" style="display: inline; margin-left: 8px;">I agree to the tournament rules and regulations</label>
+<label for="terms" style="display: inline; margin-left: 8px;">I accept combat regulations & tournament rules</label>
 </div>
 
 <div class="form-buttons">
-<button type="submit" class="form-btn submit-btn">✅ Submit Registration</button>
-<button type="button" class="form-btn cancel-btn" onclick="closeRegistrationModal()">❌ Cancel</button>
+<button type="submit" class="form-btn submit-btn">✅ CONFIRM DEPLOYMENT</button>
+<button type="button" class="form-btn cancel-btn" onclick="closeRegistrationModal()">❌ ABORT MISSION</button>
 </div>
 </form>
 </div>
@@ -999,7 +1095,7 @@ grid-template-columns:1fr;
 
 <!-- World Clock Section -->
 <section class="clock-section">
-<h2 class="clock-title">⏰ Tournament Time Zone Clock</h2>
+<h2 class="clock-title">⏰ GLOBAL COMBAT CLOCK ⏰</h2>
 <div class="clock-container">
 <div class="clock-card">
 <div class="timezone-name">🇵🇰 Pakistan (PKT)</div>
@@ -1041,20 +1137,20 @@ grid-template-columns:1fr;
 
 <!-- Location Finder Section -->
 <section class="location-section">
-<h2 class="location-title">📍 Gaming Zone Finder & Weather by Location</h2>
+<h2 class="location-title">📍 COMBAT BASE LOCATOR & TACTICAL WEATHER</h2>
 
 <div class="location-tabs">
-<button class="tab-btn active" onclick="switchTab('gaming')">🎮 Gaming Zones</button>
-<button class="tab-btn" onclick="switchTab('weather')">🌤️ Weather Finder</button>
+<button class="tab-btn active" onclick="switchTab('gaming')">🎮 GAMING BASES</button>
+<button class="tab-btn" onclick="switchTab('weather')">🌤️ WEATHER INTEL</button>
 </div>
 
 <!-- Gaming Zones Tab -->
 <div id="gaming" class="tab-content active">
 <div class="search-container">
-<input type="text" id="zoneInput" placeholder="Search gaming zones (e.g., Sahiwal, Karachi)">
-<button onclick="searchGamingZones()">Search</button>
+<input type="text" id="zoneInput" placeholder="Search bases (e.g., Sahiwal, Karachi)">
+<button onclick="searchGamingZones()">SEARCH</button>
 </div>
-<button class="location-btn" onclick="getCurrentLocationGaming()">📍 Use My Location</button>
+<button class="location-btn" onclick="getCurrentLocationGaming()">📍 USE CURRENT LOCATION</button>
 
 <div class="result-container" id="gamingResults">
 <!-- Gaming zone results will be added here -->
@@ -1064,10 +1160,10 @@ grid-template-columns:1fr;
 <!-- Weather Tab -->
 <div id="weather" class="tab-content">
 <div class="search-container">
-<input type="text" id="weatherCityInput" placeholder="Enter city name">
-<button onclick="searchWeatherLocation()">Search</button>
+<input type="text" id="weatherCityInput" placeholder="Enter location name">
+<button onclick="searchWeatherLocation()">SEARCH</button>
 </div>
-<button class="location-btn" onclick="getCurrentLocationWeather()">📍 Use My Location</button>
+<button class="location-btn" onclick="getCurrentLocationWeather()">📍 USE CURRENT LOCATION</button>
 
 <div class="result-container">
 <div class="weather-card" id="currentWeather">
@@ -1097,7 +1193,7 @@ grid-template-columns:1fr;
 </div>
 
 <div style="max-width:1200px; margin:20px auto; margin-top:40px;">
-<h3 style="color:#00ccff; margin-bottom:20px; text-align:center; text-shadow: 0 0 10px #00ccff;">5-Day Forecast</h3>
+<h3 style="color:#ffb300; margin-bottom:20px; text-align:center; text-shadow: 0 0 10px #ff6b00; letter-spacing:1px;">5-DAY WEATHER FORECAST</h3>
 <div class="forecast-container" id="forecastContainer">
 <!-- Forecast cards will be added here -->
 </div>
@@ -1106,9 +1202,9 @@ grid-template-columns:1fr;
 </section>
 
 <footer>
-<h3>Q.R GAMING ZONE</h3>
-<p>🎯 PUBG vs 🔥 Free Fire Esports Tournaments</p>
-<p style="margin-top:10px; font-size:12px;">⏰ Live Tournament Clock | 📍 Gaming Zone Finder | 🌤️ Weather Dashboard | 📋 Online Registration</p>
+<h3>⚔️ Q.R GAMING ZONE ⚔️</h3>
+<p>🎯 PUBG BATTLE ROYALE vs 🔥 FREE FIRE COMBAT</p>
+<p style="margin-top:10px; font-size:12px;">⏰ GLOBAL COMBAT CLOCK | 📍 COMBAT BASE LOCATOR | 🌤️ TACTICAL WEATHER | 📋 SECURE REGISTRATION</p>
 </footer>
 
 <script>
@@ -1122,9 +1218,9 @@ document.getElementById('successMessage').style.display = 'none';
 document.getElementById('gameType').value = gameType;
 
 if (gameType === 'pubg') {
-document.getElementById('modalTitle').textContent = '🎯 PUBG Tournament Registration';
+document.getElementById('modalTitle').textContent = '🎯 PUBG SQUAD WARFARE REGISTRATION';
 } else if (gameType === 'freefire') {
-document.getElementById('modalTitle').textContent = '🔥 Free Fire Tournament Registration';
+document.getElementById('modalTitle').textContent = '🔥 FREE FIRE COMBAT REGISTRATION';
 }
 }
 
@@ -1173,7 +1269,7 @@ headers: {
 if (response.ok) {
 document.getElementById('registrationForm').style.display = 'none';
 document.getElementById('successMessage').style.display = 'block';
-document.getElementById('successMessage').innerHTML = '✅ Registration submitted successfully!<br>Check your email for confirmation.<br>We will contact you soon!';
+document.getElementById('successMessage').innerHTML = '✅ SOLDIER DEPLOYED SUCCESSFULLY!<br>Check your email for deployment confirmation.<br>COMMAND CENTER WILL CONTACT YOU SOON!';
 
 setTimeout(() => {
 closeRegistrationModal();
@@ -1183,7 +1279,7 @@ document.getElementById('registrationForm').reset();
 }
 }).catch(error => {
 console.error('Error:', error);
-alert('Error submitting registration. Please try again or contact us on WhatsApp: 03096394084');
+alert('Error submitting registration. Contact COMMAND CENTER: 03096394084');
 });
 }
 
@@ -1253,7 +1349,7 @@ city: 'Sahiwal',
 contact: '03096394084',
 lat: 30.1967,
 lng: 72.6372,
-details: 'Main Gaming Hub - PUBG & Free Fire Tournaments',
+details: 'Main Battle Hub - PUBG & Free Fire Warfare',
 rating: '⭐⭐⭐⭐⭐'
 },
 {
@@ -1263,7 +1359,7 @@ city: 'Karachi',
 contact: '03001234567',
 lat: 24.8607,
 lng: 67.0011,
-details: 'State-of-the-art Gaming Center',
+details: 'Advanced Combat Center',
 rating: '⭐⭐⭐⭐'
 },
 {
@@ -1273,7 +1369,7 @@ city: 'Lahore',
 contact: '03211234567',
 lat: 31.5497,
 lng: 74.3436,
-details: 'Premium Gaming Experience',
+details: 'Elite Battle Arena',
 rating: '⭐⭐⭐⭐⭐'
 },
 {
@@ -1283,7 +1379,7 @@ city: 'Islamabad',
 contact: '03331234567',
 lat: 33.7738,
 lng: 73.0828,
-details: 'High-speed Gaming PCs',
+details: 'High-Performance Combat Lab',
 rating: '⭐⭐⭐⭐'
 },
 {
@@ -1293,7 +1389,7 @@ city: 'Faisalabad',
 contact: '03091234567',
 lat: 31.4181,
 lng: 72.3476,
-details: 'Tournament-ready Setup',
+details: 'Tournament Battle Station',
 rating: '⭐⭐⭐⭐'
 },
 {
@@ -1303,7 +1399,7 @@ city: 'Multan',
 contact: '03021234567',
 lat: 30.1575,
 lng: 71.4243,
-details: 'Gaming Console & PC Gaming',
+details: 'Gaming Console Combat Center',
 rating: '⭐⭐⭐⭐'
 }
 ];
@@ -1324,7 +1420,7 @@ const lat = position.coords.latitude;
 const lng = position.coords.longitude;
 searchGamingZones();
 }, error => {
-alert('Location access denied. Please enable location services.');
+alert('Location access denied. Enable location services.');
 });
 } else {
 alert('Geolocation not supported.');
@@ -1336,7 +1432,7 @@ const container = document.getElementById('gamingResults');
 container.innerHTML = '';
 
 if (zones.length === 0) {
-container.innerHTML = '<p style="color:#ffb300; grid-column:1/-1; text-align:center;">No gaming zones found. Try another search.</p>';
+container.innerHTML = '<p style="color:#ff6b00; grid-column:1/-1; text-align:center;">No bases found. Try another search.</p>';
 return;
 }
 
@@ -1346,10 +1442,10 @@ card.className = 'location-card';
 card.innerHTML = `
 <div class="location-name">${zone.name}</div>
 <div class="location-info">
-<strong>📍 Location:</strong> ${zone.location}
+<strong>📍 Base:</strong> ${zone.location}
 </div>
 <div class="location-info">
-<strong>📞 Contact:</strong> <a href="tel:${zone.contact}" style="color:#00ff88; text-decoration:none;">${zone.contact}</a>
+<strong>📞 Command:</strong> <a href="tel:${zone.contact}" style="color:#00ff88; text-decoration:none;">${zone.contact}</a>
 </div>
 <div class="location-info">
 <strong>📝 Details:</strong> ${zone.details}
@@ -1394,7 +1490,7 @@ const geoResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?
 const geoData = await geoResponse.json();
 
 if (!geoData.results || geoData.results.length === 0) {
-alert('City not found. Please try another city.');
+alert('City not found.');
 return;
 }
 
@@ -1407,8 +1503,7 @@ const weatherData = await weatherResponse.json();
 displayCurrentWeather(weatherData, name, country);
 displayForecast(weatherData);
 } catch (error) {
-console.error('Error fetching weather:', error);
-alert('Error fetching weather data. Please try again.');
+console.error('Error:', error);
 }
 }
 
@@ -1419,7 +1514,7 @@ const lat = position.coords.latitude;
 const lng = position.coords.longitude;
 fetchWeatherByCoords(lat, lng);
 }, error => {
-alert('Location access denied. Please enable location services.');
+alert('Location access denied.');
 });
 } else {
 alert('Geolocation not supported.');
@@ -1439,7 +1534,6 @@ displayCurrentWeather(weatherData, cityName, '');
 displayForecast(weatherData);
 } catch (error) {
 console.error('Error:', error);
-alert('Error fetching location weather. Please try again.');
 }
 }
 
