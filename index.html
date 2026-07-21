@@ -16,51 +16,97 @@ font-family:Arial, sans-serif;
 body{
 background:#0a0a0a;
 color:white;
+overflow-x: hidden;
 }
 
+/* Hero Section - Split Background */
 .hero{
 height:100vh;
-background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
-url('https://images.unsplash.com/photo-1542751371-adc38448a05e');
+background:linear-gradient(90deg, 
+rgba(0,0,0,0.8) 0%, 
+rgba(0,0,0,0.8) 50%, 
+rgba(0,0,0,0.8) 100%),
+url('https://images.unsplash.com/photo-1538481143235-5d630a003475?w=1200');
 background-size:cover;
 background-position:center;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
+position:relative;
+overflow:hidden;
+}
+
+.hero::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background: linear-gradient(45deg, rgba(255, 179, 0, 0.1) 0%, rgba(255, 50, 0, 0.1) 50%, rgba(100, 200, 255, 0.1) 100%);
+pointer-events:none;
+animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+0%, 100% { opacity: 0.3; }
+50% { opacity: 0.6; }
+}
+
+.hero-content {
+position:relative;
+z-index:10;
+animation: heroFadeIn 1s ease;
+}
+
+@keyframes heroFadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
 }
 
 .hero-content h1{
-font-size:60px;
+font-size:70px;
 color:#ffb300;
+text-shadow: 0 0 20px #ffb300, 0 0 40px #ff6b00;
+font-weight:900;
+letter-spacing:3px;
+margin-bottom:10px;
 }
 
 .hero-content h2{
-font-size:35px;
+font-size:40px;
 margin:15px 0;
+color:#fff;
+text-shadow: 0 0 15px #00ff88;
 }
 
 .hero-content p{
-font-size:20px;
+font-size:22px;
+margin:10px 0;
+color:#00ff88;
+text-shadow: 0 0 10px #00ff88;
 }
 
 .btn{
 display:inline-block;
 margin-top:20px;
 padding:15px 35px;
-background:#ffb300;
+background:linear-gradient(135deg, #ffb300, #ff6b00);
 color:black;
 text-decoration:none;
 font-weight:bold;
-border-radius:5px;
+border-radius:8px;
 transition: 0.3s;
-border:none;
+border:2px solid #ffb300;
 cursor:pointer;
+box-shadow: 0 0 20px #ffb300;
 }
 
 .btn:hover{
-background:#ff9500;
-transform:scale(1.05);
+background:linear-gradient(135deg, #ff6b00, #ffb300);
+transform:scale(1.1);
+box-shadow: 0 0 30px #ff6b00;
 }
 
 .section{
@@ -71,34 +117,57 @@ text-align:center;
 .card{
 max-width:700px;
 margin:auto;
-background:#161616;
+background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
 padding:30px;
 border-radius:10px;
-box-shadow:0 0 15px #ffb300;
+box-shadow:0 0 20px #ffb300;
+border:2px solid #ffb300;
 }
 
 .card h2{
 color:#ffb300;
 margin-bottom:20px;
+text-shadow: 0 0 10px #ffb300;
 }
 
 .info{
 margin:15px 0;
 font-size:22px;
+color:#00ff88;
 }
 
 /* Game Selection */
+.game-section {
+background: linear-gradient(135deg, #1a0a0a 0%, #2d1a0a 100%);
+position:relative;
+}
+
+.game-section::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background-image: 
+radial-gradient(circle at 20% 50%, rgba(255, 179, 0, 0.1) 0%, transparent 50%),
+radial-gradient(circle at 80% 80%, rgba(255, 107, 0, 0.1) 0%, transparent 50%);
+pointer-events:none;
+}
+
 .game-selection{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:20px;
-max-width:600px;
+max-width:900px;
 margin:0 auto 30px;
+position:relative;
+z-index:2;
 }
 
 .game-btn{
 padding:20px;
-background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
+background:linear-gradient(135deg, #2d1a0a, #3d2a1a);
 border:3px solid #ffb300;
 color:#ffb300;
 border-radius:10px;
@@ -106,13 +175,119 @@ cursor:pointer;
 font-weight:bold;
 font-size:18px;
 transition:0.3s;
+position:relative;
+overflow:hidden;
+}
+
+.game-btn::before {
+content:'';
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background: linear-gradient(45deg, transparent 30%, rgba(255, 179, 0, 0.2) 50%, transparent 70%);
+transform: rotate(45deg);
+animation: shine 3s infinite;
+}
+
+@keyframes shine {
+0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
 .game-btn:hover,
 .game-btn.active{
-background:#ffb300;
+background:linear-gradient(135deg, #ffb300, #ff6b00);
 color:black;
 transform:scale(1.05);
+box-shadow: 0 0 30px #ffb300;
+}
+
+/* Game Info Cards */
+.game-info-cards{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+max-width:1000px;
+margin:0 auto 40px;
+position:relative;
+z-index:2;
+}
+
+.game-card{
+background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
+padding:30px;
+border-radius:15px;
+border:3px solid #ffb300;
+box-shadow:0 0 30px rgba(255, 179, 0, 0.3);
+text-align:center;
+position:relative;
+overflow:hidden;
+transition:0.3s;
+}
+
+.game-card::before {
+content:'';
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background: radial-gradient(circle, rgba(255, 179, 0, 0.1) 0%, transparent 70%);
+pointer-events:none;
+}
+
+.game-card:hover {
+transform: translateY(-10px);
+box-shadow:0 0 50px rgba(255, 179, 0, 0.5);
+}
+
+.game-card h3{
+color:#ffb300;
+font-size:32px;
+margin-bottom:15px;
+text-shadow: 0 0 10px #ffb300;
+}
+
+.game-card .prize{
+font-size:26px;
+color:#00ff88;
+font-weight:bold;
+margin:15px 0;
+text-shadow: 0 0 10px #00ff88;
+}
+
+.game-card .entry{
+font-size:18px;
+color:#fff;
+margin:10px 0;
+}
+
+.game-card .details {
+font-size:14px;
+color:#888;
+margin:15px 0;
+}
+
+.game-card .btn-register{
+margin-top:20px;
+padding:12px 25px;
+background:linear-gradient(135deg, #ffb300, #ff6b00);
+color:black;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+font-size:16px;
+box-shadow: 0 0 15px #ffb300;
+}
+
+.game-card .btn-register:hover{
+background:linear-gradient(135deg, #ff6b00, #ffb300);
+transform:scale(1.05);
+box-shadow: 0 0 25px #ff6b00;
 }
 
 /* Modal Styles */
@@ -124,18 +299,18 @@ left: 0;
 top: 0;
 width: 100%;
 height: 100%;
-background-color: rgba(0,0,0,0.8);
+background-color: rgba(0,0,0,0.9);
 }
 
 .modal-content {
 background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
 margin: 5% auto;
 padding: 30px;
-border: 2px solid #ffb300;
+border: 3px solid #ffb300;
 border-radius: 15px;
 width: 90%;
 max-width: 600px;
-box-shadow: 0 0 30px rgba(255, 179, 0, 0.5);
+box-shadow: 0 0 50px rgba(255, 179, 0, 0.5);
 max-height: 90vh;
 overflow-y: auto;
 }
@@ -156,6 +331,7 @@ color: #ff9500;
 color: #ffb300;
 margin-bottom: 20px;
 text-align: center;
+text-shadow: 0 0 10px #ffb300;
 }
 
 .form-group {
@@ -186,7 +362,7 @@ font-family: Arial, sans-serif;
 .form-group textarea:focus,
 .form-group select:focus {
 outline: none;
-box-shadow: 0 0 10px #ffb300;
+box-shadow: 0 0 15px #ffb300;
 }
 
 .form-group textarea {
@@ -211,81 +387,43 @@ transition: 0.3s;
 }
 
 .submit-btn {
-background: #00ff00;
+background: linear-gradient(135deg, #00ff88, #00dd00);
 color: black;
+box-shadow: 0 0 15px #00ff88;
 }
 
 .submit-btn:hover {
-background: #00dd00;
+background: linear-gradient(135deg, #00dd00, #00ff88);
+box-shadow: 0 0 25px #00ff88;
 }
 
 .cancel-btn {
-background: #ff4444;
+background: linear-gradient(135deg, #ff4444, #dd0000);
 color: white;
 }
 
 .cancel-btn:hover {
-background: #dd0000;
-}
-
-/* Game Info Cards */
-.game-info-cards{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-max-width:1000px;
-margin:0 auto 40px;
-}
-
-.game-card{
-background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
-padding:25px;
-border-radius:15px;
-border:3px solid #ffb300;
-box-shadow:0 0 20px rgba(255, 179, 0, 0.3);
-text-align:center;
-}
-
-.game-card h3{
-color:#ffb300;
-font-size:28px;
-margin-bottom:15px;
-}
-
-.game-card .prize{
-font-size:24px;
-color:#00ff00;
-font-weight:bold;
-margin:15px 0;
-}
-
-.game-card .entry{
-font-size:18px;
-color:#888;
-margin:10px 0;
-}
-
-.game-card .btn-register{
-margin-top:20px;
-padding:12px 25px;
-background:#ffb300;
-color:black;
-border:none;
-border-radius:5px;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
-font-size:16px;
-}
-
-.game-card .btn-register:hover{
-background:#ff9500;
+background: linear-gradient(135deg, #dd0000, #ff4444);
 }
 
 /* Clock Styles */
 .clock-section{
 padding:60px 20px;
-background:#111;
+background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+position:relative;
+}
+
+.clock-section::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background-image:
+radial-gradient(circle at 30% 30%, rgba(0, 255, 136, 0.05) 0%, transparent 50%),
+radial-gradient(circle at 70% 70%, rgba(255, 107, 0, 0.05) 0%, transparent 50%);
+pointer-events:none;
 }
 
 .clock-container{
@@ -294,25 +432,27 @@ grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
 gap:20px;
 max-width:1200px;
 margin:0 auto;
+position:relative;
+z-index:2;
 }
 
 .clock-card{
 background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
 padding:25px;
 border-radius:15px;
-border:2px solid #ffb300;
-box-shadow:0 0 20px rgba(255, 179, 0, 0.3);
+border:2px solid #00ff88;
+box-shadow:0 0 20px rgba(0, 255, 136, 0.3);
 transition:transform 0.3s;
 }
 
 .clock-card:hover{
 transform:translateY(-5px);
-box-shadow:0 0 30px rgba(255, 179, 0, 0.5);
+box-shadow:0 0 40px rgba(0, 255, 136, 0.5);
 }
 
 .timezone-name{
 font-size:18px;
-color:#ffb300;
+color:#00ff88;
 font-weight:bold;
 margin-bottom:10px;
 }
@@ -320,9 +460,9 @@ margin-bottom:10px;
 .digital-clock{
 font-size:48px;
 font-weight:bold;
-color:#00ff00;
+color:#00ff88;
 font-family:'Courier New', monospace;
-text-shadow:0 0 10px #00ff00;
+text-shadow:0 0 15px #00ff88;
 margin:15px 0;
 letter-spacing:2px;
 }
@@ -335,15 +475,29 @@ margin-top:10px;
 
 .clock-title{
 text-align:center;
-color:#ffb300;
+color:#00ff88;
 font-size:28px;
 margin-bottom:40px;
+text-shadow: 0 0 15px #00ff88;
 }
 
 /* Location Finder Styles */
 .location-section{
 padding:60px 20px;
-background:#0a0a0a;
+background: linear-gradient(135deg, #0a0a0a, #1a1a0a);
+position:relative;
+}
+
+.location-section::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background-image:
+radial-gradient(circle at 50% 50%, rgba(255, 179, 0, 0.05) 0%, transparent 50%);
+pointer-events:none;
 }
 
 .location-title{
@@ -351,6 +505,9 @@ text-align:center;
 color:#ffb300;
 font-size:28px;
 margin-bottom:30px;
+text-shadow: 0 0 10px #ffb300;
+position:relative;
+z-index:2;
 }
 
 .location-tabs{
@@ -359,6 +516,8 @@ justify-content:center;
 gap:10px;
 margin-bottom:30px;
 flex-wrap:wrap;
+position:relative;
+z-index:2;
 }
 
 .tab-btn{
@@ -375,6 +534,7 @@ transition:0.3s;
 .tab-btn.active{
 background:#ffb300;
 color:black;
+box-shadow: 0 0 15px #ffb300;
 }
 
 .tab-btn:hover{
@@ -387,6 +547,8 @@ max-width:500px;
 margin:0 auto 30px;
 display:flex;
 gap:10px;
+position:relative;
+z-index:2;
 }
 
 .search-container input{
@@ -416,7 +578,7 @@ background:#ff9500;
 
 .location-btn{
 padding:8px 15px;
-background:#00ff00;
+background:#00ff88;
 color:black;
 border:none;
 border-radius:5px;
@@ -436,6 +598,8 @@ grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
 gap:20px;
 max-width:1200px;
 margin:0 auto;
+position:relative;
+z-index:2;
 }
 
 .location-card{
@@ -461,20 +625,36 @@ line-height:1.6;
 }
 
 .location-info strong{
-color:#00ff00;
+color:#00ff88;
 }
 
 /* Weather Styles */
 .weather-section{
 padding:60px 20px;
-background:#111;
+background: linear-gradient(135deg, #0a0a0a, #1a0a1a);
+position:relative;
+}
+
+.weather-section::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background-image:
+radial-gradient(circle at 50% 50%, rgba(0, 200, 255, 0.05) 0%, transparent 50%);
+pointer-events:none;
 }
 
 .weather-title{
 text-align:center;
-color:#ffb300;
+color:#00ccff;
 font-size:28px;
 margin-bottom:30px;
+text-shadow: 0 0 10px #00ccff;
+position:relative;
+z-index:2;
 }
 
 .weather-search{
@@ -482,13 +662,15 @@ max-width:500px;
 margin:0 auto 40px;
 display:flex;
 gap:10px;
+position:relative;
+z-index:2;
 }
 
 .weather-search input{
 flex:1;
 padding:12px;
 background:#1a1a1a;
-border:2px solid #ffb300;
+border:2px solid #00ccff;
 color:white;
 border-radius:5px;
 font-size:16px;
@@ -496,7 +678,7 @@ font-size:16px;
 
 .weather-search button{
 padding:12px 25px;
-background:#ffb300;
+background:#00ccff;
 color:black;
 border:none;
 border-radius:5px;
@@ -506,7 +688,7 @@ transition:0.3s;
 }
 
 .weather-search button:hover{
-background:#ff9500;
+background:#0099ff;
 }
 
 .weather-container{
@@ -515,20 +697,22 @@ grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
 gap:20px;
 max-width:1200px;
 margin:0 auto;
+position:relative;
+z-index:2;
 }
 
 .weather-card{
 background:linear-gradient(135deg, #1a1a1a, #2d2d2d);
 padding:30px;
 border-radius:15px;
-border:2px solid #ffb300;
-box-shadow:0 0 20px rgba(255, 179, 0, 0.3);
+border:2px solid #00ccff;
+box-shadow:0 0 20px rgba(0, 200, 255, 0.3);
 text-align:center;
 }
 
 .city-name{
 font-size:24px;
-color:#ffb300;
+color:#00ccff;
 font-weight:bold;
 margin-bottom:15px;
 }
@@ -540,9 +724,9 @@ margin:15px 0;
 
 .temperature{
 font-size:48px;
-color:#00ff00;
+color:#00ff88;
 font-weight:bold;
-text-shadow:0 0 10px #00ff00;
+text-shadow:0 0 10px #00ff88;
 margin:15px 0;
 }
 
@@ -558,7 +742,7 @@ grid-template-columns:1fr 1fr;
 gap:15px;
 margin-top:20px;
 padding-top:20px;
-border-top:1px solid #ffb300;
+border-top:1px solid #00ccff;
 }
 
 .detail-item{
@@ -574,7 +758,7 @@ color:#888;
 
 .detail-value{
 font-size:18px;
-color:#ffb300;
+color:#00ccff;
 font-weight:bold;
 }
 
@@ -589,7 +773,7 @@ margin-top:30px;
 background:#0a0a0a;
 padding:15px;
 border-radius:10px;
-border:1px solid #ffb300;
+border:1px solid #00ccff;
 text-align:center;
 }
 
@@ -606,14 +790,24 @@ margin:10px 0;
 
 .forecast-temp{
 font-size:14px;
-color:#00ff00;
+color:#00ccff;
 }
 
 footer{
-background:#111;
+background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
 padding:20px;
 text-align:center;
-border-top:2px solid #ffb300;
+border-top:3px solid #ffb300;
+box-shadow: 0 -10px 30px rgba(255, 179, 0, 0.2);
+}
+
+footer h3 {
+color:#ffb300;
+text-shadow: 0 0 10px #ffb300;
+}
+
+footer p {
+color:#888;
 }
 
 .tab-content{
@@ -626,13 +820,14 @@ display:block;
 
 .success-message {
 display: none;
-background: #00ff00;
+background: linear-gradient(135deg, #00ff88, #00dd00);
 color: black;
 padding: 15px;
 border-radius: 5px;
 margin-bottom: 20px;
 text-align: center;
 font-weight: bold;
+box-shadow: 0 0 20px #00ff88;
 }
 
 @media (max-width: 768px){
@@ -676,50 +871,53 @@ grid-template-columns:1fr;
 <section class="hero">
 <div class="hero-content">
 <h1>Q.R GAMING ZONE</h1>
-<h2>PUBG & FREE FIRE TOURNAMENTS</h2>
+<h2>🎯 PUBG vs 🔥 FREE FIRE</h2>
+<p>ESPORTS TOURNAMENTS 2026</p>
 <p>Choose Your Game & Register Now!</p>
 <button class="btn" onclick="document.getElementById('gameSelection').scrollIntoView({behavior: 'smooth'})">
-🎮 Select Game
+🎮 SELECT GAME
 </button>
 </div>
 </section>
 
 <!-- Game Selection Section -->
-<section class="section" id="gameSelection">
-<h2 style="color:#ffb300; margin-bottom:30px;">🎮 Choose Your Tournament</h2>
+<section class="game-section" id="gameSelection">
+<div class="section">
+<h2 style="color:#ffb300; margin-bottom:30px; text-shadow: 0 0 15px #ffb300; font-size:32px;">🎮 Choose Your Tournament</h2>
 
 <div class="game-info-cards">
 <!-- PUBG Card -->
 <div class="game-card">
 <h3>🎯 PUBG</h3>
-<div class="prize">Prize: Rs. 5000</div>
+<div class="prize">Rs. 5000</div>
 <div class="entry">Entry Fee: Rs. 500</div>
-<p style="margin:15px 0; color:#888;">4v4 Squad Battle</p>
+<div class="details">4v4 Squad Battle • Tactical Gameplay</div>
 <button class="btn-register" onclick="openRegistrationModal('pubg')">
-Register for PUBG
+🎯 Register for PUBG
 </button>
 </div>
 
 <!-- Free Fire Card -->
 <div class="game-card">
 <h3>🔥 FREE FIRE</h3>
-<div class="prize">Prize: Rs. 3000</div>
+<div class="prize">Rs. 3000</div>
 <div class="entry">Entry Fee: Rs. 300</div>
-<p style="margin:15px 0; color:#888;">1v1 Deathmatch</p>
+<div class="details">1v1 Deathmatch • Fast-Paced Action</div>
 <button class="btn-register" onclick="openRegistrationModal('freefire')">
-Register for Free Fire
+🔥 Register for Free Fire
 </button>
 </div>
 </div>
 
 <div class="card" style="margin-top:40px;">
 <h2>Tournament Details</h2>
-<div class="info">🏆 PUBG - Winner Prize: Rs. 5000 | Entry: Rs. 500</div>
-<div class="info">🔥 FREE FIRE - Winner Prize: Rs. 3000 | Entry: Rs. 300</div>
+<div class="info">🎯 PUBG - Prize: Rs. 5000 | Entry: Rs. 500</div>
+<div class="info">🔥 FREE FIRE - Prize: Rs. 3000 | Entry: Rs. 300</div>
 <div class="info">👥 Players: 50 - 100 Per Game</div>
 <div class="info">📞 Contact: 03096394084</div>
 <div class="info">📍 Sahiwal, Kot Khadam Ali Shah, Choki Wali Gali</div>
 <div class="info">📺 Live Spectator + Big Screen Setup</div>
+</div>
 </div>
 </section>
 
@@ -899,7 +1097,7 @@ Register for Free Fire
 </div>
 
 <div style="max-width:1200px; margin:20px auto; margin-top:40px;">
-<h3 style="color:#ffb300; margin-bottom:20px; text-align:center;">5-Day Forecast</h3>
+<h3 style="color:#00ccff; margin-bottom:20px; text-align:center; text-shadow: 0 0 10px #00ccff;">5-Day Forecast</h3>
 <div class="forecast-container" id="forecastContainer">
 <!-- Forecast cards will be added here -->
 </div>
@@ -909,7 +1107,7 @@ Register for Free Fire
 
 <footer>
 <h3>Q.R GAMING ZONE</h3>
-<p>Powered by PUBG & Free Fire Esports Tournaments</p>
+<p>🎯 PUBG vs 🔥 Free Fire Esports Tournaments</p>
 <p style="margin-top:10px; font-size:12px;">⏰ Live Tournament Clock | 📍 Gaming Zone Finder | 🌤️ Weather Dashboard | 📋 Online Registration</p>
 </footer>
 
@@ -1151,7 +1349,7 @@ card.innerHTML = `
 <strong>📍 Location:</strong> ${zone.location}
 </div>
 <div class="location-info">
-<strong>📞 Contact:</strong> <a href="tel:${zone.contact}" style="color:#00ff00; text-decoration:none;">${zone.contact}</a>
+<strong>📞 Contact:</strong> <a href="tel:${zone.contact}" style="color:#00ff88; text-decoration:none;">${zone.contact}</a>
 </div>
 <div class="location-info">
 <strong>📝 Details:</strong> ${zone.details}
